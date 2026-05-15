@@ -1,0 +1,28 @@
+services:
+  mc:
+    image: itzg/minecraft-server
+    container_name: papermc-server
+
+    ports:
+      - "25565:25565"
+      - "8123:8123" # Dynmap
+
+    environment:
+      EULA: "TRUE"
+      TYPE: "PAPER"
+      VERSION: "1.21.11"
+      MEMORY: "4G"
+      TZ: "America/New_York"
+      ENABLE_ROLLING_LOGS: "TRUE"
+      OPS: "LightBound15"
+
+      PLUGINS: |
+        https://download.luckperms.net/1632/bukkit/loader/LuckPerms-Bukkit-5.5.44.jar
+        https://github.com/EssentialsX/Essentials/releases/download/2.21.2/EssentialsX-2.21.2.jar
+        https://www.curseforge.com/minecraft/bukkit-plugins/dynmap/download/7460127
+        https://www.curseforge.com/minecraft/mc-mods/worldedit/download/7855515
+
+    volumes:
+      - ./data:/data
+
+    restart: unless-stopped
